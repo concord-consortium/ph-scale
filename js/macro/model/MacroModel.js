@@ -42,7 +42,6 @@ define( function( require ) {
       Solute.MILK,
       Solute.CHICKEN_SOUP,
       Solute.COFFEE,
-      Solute.BEER,
       Solute.SODA,
       Solute.VOMIT,
       Solute.BATTERY_ACID
