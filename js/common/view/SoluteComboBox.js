@@ -21,6 +21,7 @@ define( function( require ) {
 
   // strings
   var pattern_0name_1pH = require( 'string!PH_SCALE/pattern.0name.1pH' );
+  var pattern_0name     = require( 'string!PH_SCALE/pattern.0name' );
 
   /**
    * @param {Array<Solute>} solutes
@@ -28,13 +29,13 @@ define( function( require ) {
    * @param {Node} soluteListParent
    * @constructor
    */
-  function SoluteComboBox( solutes, selectedSolute, soluteListParent ) {
+  function SoluteComboBox( solutes, selectedSolute, soluteListParent, hidePh ) {
 
     // items
     var items = [];
     for ( var i = 0; i < solutes.length; i++ ) {
       var solute = solutes[i];
-      items[i] = createItem( solute );
+      items[i] = createItem( solute, hidePh );
     }
 
     ComboBox.call( this, items, selectedSolute, soluteListParent, {
@@ -51,16 +52,23 @@ define( function( require ) {
    * @param solute
    * @returns {*|{node: *, value: *}}
    */
-  var createItem = function( solute ) {
+  var createItem = function( solute, hidePh ) {
     var node = new Node();
 
     // color chip
     var soluteColor = solute.stockColor;
     var colorNode = new Rectangle( 0, 0, 20, 20, { fill: soluteColor, stroke: soluteColor.darkerColor() } );
+    var label = "";
+
+    if (hidePh) {
+      label = StringUtils.format( pattern_0name, solute.name );
+    } else {
+      label = StringUtils.format( pattern_0name_1pH, solute.name, Util.toFixed( solute.pH, PHScaleConstants.PH_COMBO_BOX_DECIMAL_PLACES ) );
+    }
 
     // label
     var textNode = new Text(
-      StringUtils.format( pattern_0name_1pH, solute.name, Util.toFixed( solute.pH, PHScaleConstants.PH_COMBO_BOX_DECIMAL_PLACES ) ),
+      label,
       { font: new PhetFont( 22 ) } );
 
     node.addChild( colorNode );

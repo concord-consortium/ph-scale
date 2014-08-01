@@ -66,7 +66,7 @@ define( function( require ) {
 
     // solutes combo box
     var soluteListParent = new Node();
-    var soluteComboBox = new SoluteComboBox( model.solutes, model.dropper.soluteProperty, soluteListParent );
+    var soluteComboBox = new SoluteComboBox( model.solutes, model.dropper.soluteProperty, soluteListParent, model.hidePhInMenu );
 
     var resetAllButton = new ResetAllButton( {
       scale: 1.32,

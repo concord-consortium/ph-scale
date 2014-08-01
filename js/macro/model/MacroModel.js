@@ -28,6 +28,7 @@ define( function( require ) {
   function MacroModel( options ) {
 
     options = _.extend( {
+      hidePhInMenu: false,
       autoFillVolume: 0.5 // L, automatically fill beaker with this much solute when the solute changes
     }, options );
 
@@ -83,6 +84,8 @@ define( function( require ) {
       // animate the dropper adding solute to the beaker
       thisModel.startAutoFill();
     } );
+
+    this.hidePhInMenu = options.hidePhInMenu;
 
     // Enable faucets and dropper based on amount of solution in the beaker.
     thisModel.solution.volumeProperty.link( function( volume ) {
